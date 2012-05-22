@@ -1,15 +1,21 @@
 var jsdom = require('jsdom')
 
-exports.jsdom_wrapper = function(html) {
-    html = html || '<html><head></head><body><div id="one"></div><div id="two"></div></body>'
-    return function(cb) {
-        var testcase = this
-        jsdom.env(html,
-            [
+var initial_reqs = [
                 '../lib/jquery-1.6.4.js',
                 '../lib/mustache.js',
                 '../lib/marimo.js'
-            ], function(err, window) {
+                ]
+
+exports.jsdom_wrapper = function(html, extra_reqs) {
+    html = html || '<html><head></head><body><div id="one"></div><div id="two"></div></body>'
+    reqs = initial_reqs;
+    if (extra_reqs){
+        reqs.concat(extra_reqs);
+    }
+    return function(cb) {
+        var testcase = this
+        jsdom.env(html, reqs,
+             function(err, window) {
                 window.$.ajax = function(url, settings) {
                     var success = settings.success
                     var error = settings.error
