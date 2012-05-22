@@ -8,6 +8,8 @@ exports.jsdom_wrapper = function(html) {
             [
                 '../lib/jquery-1.6.4.js',
                 '../lib/mustache.js',
+                '../lib/underscore-min.js',
+                '../lib/EventEmitter.js',
                 '../lib/marimo.js'
             ], function(err, window) {
                 window.$.ajax = function(url, settings) {

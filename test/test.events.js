@@ -5,11 +5,11 @@ exports.test_events = {
     test_marimo_emit: function(test) {
         var marimo = this.window.marimo
         var event_fired = false
-        marimo.$(this.window.document).bind('test_event', function() {
+        marimo.events._emitter.addListener.call(marimo.events._emitter, 'test_event', function() {
             event_fired = true
         })
-        marimo.emit('test_event')
-        test.ok(marimo.events['test_event'],true,'event firing registered')
+        marimo.events.emit('test_event')
+        test.ok(marimo.events.seen('test_event'),true,'event firing registered')
         test.ok(event_fired, 'event was fired')
         test.done()
     },
@@ -20,7 +20,7 @@ exports.test_events = {
         marimo.widgets.one.on('test_on', function() {
             event_caught = true
         }, marimo.widgets.one)
-        marimo.emit('test_on')
+        marimo.events.emit('test_on')
         test.ok(event_caught, 'test_on event was caught by widget')
 
         test.done()
