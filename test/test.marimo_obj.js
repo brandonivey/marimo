@@ -75,7 +75,7 @@ exports.test_marimo_obj = {
     test_register_module: function(test) {
         var marimo = this.window.marimo;
         var mod = {
-            widget_lib: {
+            widgetlib: {
               widget1: {}
             },
             register: function(mar) {
@@ -83,7 +83,7 @@ exports.test_marimo_obj = {
             }
         };
         marimo.register_module(mod);
-        test.equal(marimo.widget_lib.widget1, mod.widget_lib.widget1);
+        test.equal(marimo.widgetlib.widget1, mod.widgetlib.widget1);
         test.equal(mod.called);
         test.done();
     }

@@ -7,10 +7,10 @@ var initial_reqs = [
                 ]
 
 exports.jsdom_wrapper = function(html, extra_reqs) {
-    html = html || '<html><head></head><body><div id="one"></div><div id="two"></div></body>'
+    html = html || '<html><head></head><body><div id="one"></div><div id="two"></div></body>';
     reqs = initial_reqs;
     if (extra_reqs){
-        reqs.concat(extra_reqs);
+        reqs = reqs.concat(extra_reqs);
     }
     return function(cb) {
         var testcase = this
