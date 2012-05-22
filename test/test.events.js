@@ -5,7 +5,7 @@ exports.test_events = {
     test_marimo_emit: function(test) {
         var marimo = this.window.marimo
         var event_fired = false
-        marimo.events._emitter.addListener.call(marimo.events._emitter, 'test_event', function() {
+        marimo.events._emitter.on.call(marimo.events._emitter, 'test_event', function() {
             event_fired = true
         })
         marimo.events.emit('test_event')
@@ -25,21 +25,21 @@ exports.test_events = {
 
         test.done()
     },
-    test_widget__onlist: function(test) {
+    test_widget_ons: function(test) {
         var marimo = this.window.marimo
         marimo.add_widget({id:'one'})
         var listener_triggered = false
         marimo.widgets.one.on(['event1', 'event2', 'event3'], function() {
             listener_triggered = true
         })
-        marimo.emit('event1')
-        test.equal(marimo.events['event1'], true, 'event1 registerd')
+        marimo.events.emit('event1')
+        test.equal(marimo.events.seen('event1'), true, 'event1 registerd')
         test.equal(listener_triggered, false, 'listener not triggered after event1')
-        marimo.emit('event2')
-        test.equal(marimo.events['event2'], true, 'event2 registerd')
+        marimo.events.emit('event2')
+        test.equal(marimo.events.seen('event2'), true, 'event2 registerd')
         test.equal(listener_triggered, false, 'listener not triggered after event2')
-        marimo.emit('event3')
-        test.equal(marimo.events['event3'], true, 'event3 registerd')
+        marimo.events.emit('event3')
+        test.equal(marimo.events.seen('event3'), true, 'event3 registerd')
         test.equal(listener_triggered, true, 'listener triggered after event3')
         test.done()
     }
