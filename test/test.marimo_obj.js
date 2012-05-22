@@ -83,8 +83,9 @@ exports.test_marimo_obj = {
             }
         };
         marimo.register_module(mod);
-        test.equal(marimo.widget_lib.widget1, mod.widget1);
+        test.equal(marimo.widget_lib.widget1, mod.widget_lib.widget1);
         test.equal(mod.called);
+        test.done();
     }
     // not testing random_int.
 }
