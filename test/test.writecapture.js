@@ -1,7 +1,7 @@
 var jsdom_wrapper = require('./util.test.js').jsdom_wrapper
 
 exports.test_wc_widget = {
-    setUp: jsdom_wrapper(),
+    setUp: jsdom_wrapper(null, ['../lib/marimo.writecapture.js']),
     test_decode: function(test) {
         var marimo = this.window.marimo
         var wcwidg = Object.create(marimo.widgetlib.writecapture_widget)
@@ -13,7 +13,7 @@ exports.test_wc_widget = {
             '$ENDSCRIPT',
             'some junk'
         ].join('\n')
-        var newhtml = wcwidg.decode(html)
+        var newhtml = marimo.writecapture.decode(html)
         test.ok(!newhtml.match(/\$ENDSCRIPT/g), 'do not see $ENDSCRIPT')
         test.ok(newhtml.match(/<\/script>/g), 'do see </script>')
 

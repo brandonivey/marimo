@@ -6,7 +6,6 @@ var initial_reqs = [
                 '../lib/underscore-min.js',
                 '../lib/smokesignals.min.js',
                 '../lib/marimo.js',
-                '../lib/marimo.requestful.js'
                 ]
 
 exports.jsdom_wrapper = function(html, extra_reqs) {

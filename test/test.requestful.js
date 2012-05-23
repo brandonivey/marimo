@@ -8,7 +8,7 @@ setTimeout = function(fun) { fun(); }
 */
 
 exports.test_request_widget = {
-    setUp: jsdom_wrapper(),
+    setUp: jsdom_wrapper(null, ['../lib/marimo.requestful.js']),
     test_make_request: function(test) {
         var marimo = this.window.marimo
         var requests_made = []
