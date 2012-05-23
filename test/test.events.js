@@ -42,5 +42,17 @@ exports.test_events = {
         test.equal(marimo.events.seen('event3'), true, 'event3 registerd')
         test.equal(listener_triggered, true, 'listener triggered after event3')
         test.done()
+    },
+    test_event_data: function(test) {
+        var marimo = this.window.marimo
+        marimo.add_widget({id:'one'})
+        var passed_arg = null
+        var data = {rainbow:'unicorn'}
+        marimo.widgets.one.on('test_data_event', function(data) {
+            passed_arg = data
+        })
+        marimo.events.emit('test_data_event', data)
+        test.equal(passed_arg, data, 'data passed via emit')
+        test.done()
     }
 }
