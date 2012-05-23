@@ -71,6 +71,22 @@ exports.test_marimo_obj = {
         test.equal(objb.b_stuff.name, 'b_stuff', 'function name preserved')
 
         test.done()
+    },
+    test_register_module: function(test) {
+        var marimo = this.window.marimo;
+        var mod = {
+            init: function init () {},
+            widgetlib: {
+              widget1: {}
+            },
+            register: function(mar) {
+              this.rcalled = true
+            }
+        };
+        marimo.register_module(mod);
+        test.equal(marimo.widgetlib.widget1, mod.widgetlib.widget1);
+        test.equal(mod.called);
+        test.done();
     }
     // not testing random_int.
 }
