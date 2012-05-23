@@ -16,14 +16,14 @@ exports.test_request_widget = {
             requests_made.push(settings)
         }
         var widget_args_list = [
-            {widget_prototype:'request_widget', murl:'/some/url0'},
-            {widget_prototype:'request_widget', murl:'/some/url1'},
-            {widget_prototype:'request_widget', murl:'/some/url1'}
+            {widget_prototype:'requestful_widget', murl:'/some/url0'},
+            {widget_prototype:'requestful_widget', murl:'/some/url1'},
+            {widget_prototype:'requestful_widget', murl:'/some/url1'}
         ]
         marimo.add_widgets(widget_args_list)
         _.values(marimo.widgets).forEach(function(w){w.add_request()})
 
-        marimo.make_request()
+        marimo.requestful.make_request()
         test.equal(requests_made.length, 2, 'two requests were made')
 
         var urls_requested = _.map(requests_made, function(r){return r.url}).sort()
@@ -35,9 +35,9 @@ exports.test_request_widget = {
     test_handle_response: function(test) {
         var marimo = this.window.marimo
         var widget_args_list = [
-            {widget_prototype:'request_widget', murl:'/some/url0', id:'one'},
-            {widget_prototype:'request_widget', murl:'/some/url1', id:'two'},
-            {widget_prototype:'request_widget', murl:'/some/url1', id:'three'}
+            {widget_prototype:'requestful_widget', murl:'/some/url0', id:'one'},
+            {widget_prototype:'requestful_widget', murl:'/some/url1', id:'two'},
+            {widget_prototype:'requestful_widget', murl:'/some/url1', id:'three'}
         ]
         marimo.add_widgets(widget_args_list)
         var url = '/some/url1'
@@ -53,8 +53,8 @@ exports.test_request_widget = {
         }]
         _.each(marimo.widgets, function(v,k,l) { v.add_request() })
         // TODO
-        marimo.handle_response(url, data)
-        test.equal(_.keys(marimo.requests).length, 1, 'requests got cleaned up for url1')
+        marimo.requestful.handle_response(url, data)
+        test.equal(_.keys(marimo.requestful.requests).length, 1, 'requests got cleaned up for url1')
         var div1text = marimo.$('#one').text()
         test.equal(div1text, 'hi camus', 'html appropriate for div1')
         var div1text = marimo.$('#two').text()
