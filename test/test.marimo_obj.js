@@ -75,6 +75,7 @@ exports.test_marimo_obj = {
     test_register_module: function(test) {
         var marimo = this.window.marimo;
         var mod = {
+            init: function init () {},
             widgetlib: {
               widget1: {}
             },

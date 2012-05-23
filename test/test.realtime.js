@@ -5,9 +5,6 @@ exports.test_realtime = {
     setUp: jsdom_wrapper('<html><head></head><body><div id="one"></div><div id="two"></div></body>', ['../lib/realtime.js']),
     test_no_errors: function(test) {
         marimo = this.window.marimo;
-        console.log(marimo);
-        console.log(marimo.realtime);
-        console.log(marimo.widgetlib);
         test.ok(marimo.realtime);
         test.ok(marimo.widgetlib.browsermq);
         test.done();
