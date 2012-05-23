@@ -1,4 +1,12 @@
 # marimo
+
+## disclaimer
+
+marimo is beta software. these docs are not current with
+that which is HEAD. at this point if you are interested in 
+using marimo, read its source and look at the examples in 
+nathanielksmith/marimodemo.
+
 ## smart widgets
 
 marimo is a library for self-aware, nonblocking, and interactive
@@ -83,6 +91,10 @@ widget to massage incoming json (see the twitter example above).
 with a pseudo-docstring format. [marimodemo](http://github.com/nathanielksmith/marimodemo) contains examples. The stuff in lib/docs should be
 considered highly deprecated; it will be deleted soon. Wiki pages and more examples (and probably a homepage)
 are TODOs at this point.
+
+### tests
+
+marimo has a test suite. it bootstraps itself with jsdom so testing can occur in nodeunit.
 
 ### meta
 
