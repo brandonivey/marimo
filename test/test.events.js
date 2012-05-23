@@ -2,10 +2,10 @@ var jsdom_wrapper = require('./util.test.js').jsdom_wrapper
 
 exports.test_events = {
     setUp: jsdom_wrapper(),
-    test_marimo_emit: function(test) {
+    test_marimo_on_and_emit: function(test) {
         var marimo = this.window.marimo
         var event_fired = false
-        marimo.events._emitter.on.call(marimo.events._emitter, 'test_event', function() {
+        marimo.events.on('test_event', function() {
             event_fired = true
         })
         marimo.events.emit('test_event')
@@ -53,6 +53,19 @@ exports.test_events = {
         })
         marimo.events.emit('test_data_event', data)
         test.equal(passed_arg, data, 'data passed via emit')
+        test.done()
+    },
+    test_widget_emit: function(test) {
+        var marimo = this.window.marimo
+        marimo.add_widget({id:'one'})
+        marimo.add_widget({id:'two'})
+        var passed_arg = null
+        var data = {rainbow:'unicorn'}
+        marimo.widgets.two.on('test_emit_event', function(data) {
+            passed_args = data
+        })
+        marimo.widgets.one.emit('test_emit_event', data)
+        test.equal(passed_args._sender, 'one', "two saw one's event")
         test.done()
     }
 }
